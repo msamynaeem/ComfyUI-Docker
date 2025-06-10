@@ -9,7 +9,7 @@ services:
     ports:
       - "3000:8188"
     volumes:
-      - comfyui-data:/app
+      - comfyui_data:/app
     restart: always
     labels:
       - coolify.enable=true
@@ -20,9 +20,9 @@ services:
       - traefik.http.routers.comfyui.tls.certresolver=letsencrypt
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8188"]
-      interval: 30s
-      timeout: 10s
+      interval: 10s
+      timeout: 3s
       retries: 5
 
 volumes:
-  comfyui-data:
+  comfyui_data:
