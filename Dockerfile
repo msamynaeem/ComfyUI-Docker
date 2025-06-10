@@ -2,20 +2,15 @@ FROM python:3.10-slim
 
 WORKDIR /app
 
-# تثبيت الأدوات الأساسية
+# Install system dependencies
 RUN apt update && apt install -y git wget curl ffmpeg libgl1 unzip && rm -rf /var/lib/apt/lists/*
 
+# Install Python packages
+RUN pip install pyyaml torch torchvision
 
-
-# تثبيت مكتبات بايثون المطلوبة لتشغيل ComfyUI
-RUN pip install --upgrade pip && \
-    pip install pyyaml torch torchvision pillow
-
-# تحميل ComfyUI
+# Clone ComfyUI into /app (or adjust this to use local code)
 RUN git clone https://github.com/comfyanonymous/ComfyUI.git /app
 
-# فتح المنفذ
 EXPOSE 8188
 
-# أمر التشغيل
 CMD ["python", "main.py"]
