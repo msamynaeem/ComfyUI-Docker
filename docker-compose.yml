@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  comfyui:
+    image: comfyui/comfyui:latest
+    container_name: comfyui
+    ports:
+      - "3000:8188"
+    volumes:
+      - comfyui_data:/comfyui
+    restart: always
+    labels:
+      - "coolify.enable=true"
+      - "coolify.application.domain=comfy.cadeauxfleur.com"
+      - "traefik.enable=true"
+      - "traefik.http.routers.comfyui.rule=Host(`comfy.cadeauxfleur.com`)"
+      - "traefik.http.routers.comfyui.entrypoints=websecure"
+      - "traefik.http.routers.comfyui.tls.certresolver=letsencrypt"
+
+volumes:
+  comfyui_data:
