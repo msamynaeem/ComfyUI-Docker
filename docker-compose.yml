@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   comfyui:
-    image: comfyui/comfyui:latest
+    image: ghcr.io/comfyanonymous/comfyui:latest
     container_name: comfyui
     ports:
       - "3000:8188"
