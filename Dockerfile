@@ -3,7 +3,9 @@ FROM python:3.10-slim
 WORKDIR /app
 
 # تثبيت الأدوات الأساسية
-RUN apt update && apt install -y git wget ffmpeg libgl1 unzip && rm -rf /var/lib/apt/lists/*
+RUN apt update && apt install -y git wget curl ffmpeg libgl1 unzip && rm -rf /var/lib/apt/lists/*
+
+
 
 # تثبيت مكتبات بايثون المطلوبة لتشغيل ComfyUI
 RUN pip install --upgrade pip && \
