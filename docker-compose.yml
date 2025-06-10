@@ -2,12 +2,14 @@ version: '3.8'
 
 services:
   comfyui:
-    image: ghcr.io/pythongosssss/comfyui:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: comfyui
     ports:
       - "3000:8188"
     volumes:
-      - comfyui_data:/comfyui
+      - comfyui_data:/app
     restart: always
     labels:
       - "coolify.enable=true"
