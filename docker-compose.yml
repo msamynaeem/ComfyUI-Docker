@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   comfyui:
@@ -9,15 +9,20 @@ services:
     ports:
       - "3000:8188"
     volumes:
-      - comfyui_data:/app
+      - comfyui-data:/app
     restart: always
     labels:
-      - "coolify.enable=true"
-      - "coolify.application.domain=comfy.cadeauxfleur.com"
-      - "traefik.enable=true"
-      - "traefik.http.routers.comfyui.rule=Host(`comfy.cadeauxfleur.com`)"
-      - "traefik.http.routers.comfyui.entrypoints=websecure"
-      - "traefik.http.routers.comfyui.tls.certresolver=letsencrypt"
+      - coolify.enable=true
+      - coolify.application.domain=comfy.cadeauxfleur.com
+      - traefik.enable=true
+      - traefik.http.routers.comfyui.rule=Host(`comfy.cadeauxfleur.com`)
+      - traefik.http.routers.comfyui.entrypoints=websecure
+      - traefik.http.routers.comfyui.tls.certresolver=letsencrypt
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8188"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
 volumes:
-  comfyui_data:
+  comfyui-data:
